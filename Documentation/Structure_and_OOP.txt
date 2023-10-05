@@ -1,0 +1,107 @@
+public class Main {
+
+  public static void main(String[] args) {
+    int result = sum(10);
+    System.out.println(result);
+  }
+
+  static void myMethod() {
+    // code to be executed
+  }
+}
+
+
+** Here (public) is a Access Modifier
+** (class) is a keyword
+** (static) means that the method belongs to the Main class and not an object of the Main class.
+** (void) means that this method does not have a return value
+** main() is the name of the method
+
+
+Access Modifiers:
+
+public:	The class is accessible by any other class.
+private: The code is only accessible within the declared class.
+protected: The code is accessible in the same package and subclasses.
+
+Non-Access Modifiers:
+
+final: The class cannot be inherited by other classes.
+static:	Attributes and methods belongs to the class, rather than an object.
+	A static method means that it can be accessed without creating an object of the class, unlike public:
+
+	public class Main {
+ 	 // Static method
+ 	 static void myStaticMethod() {
+ 	   System.out.println("Static methods can be called without creating objects");
+ 	 }
+
+ 	 // Public method
+ 	 public void myPublicMethod() {
+  	  System.out.println("Public methods must be called by creating objects");
+ 	 }
+
+ 	 // Main method
+  	public static void main(String[ ] args) {
+   	 myStaticMethod(); // Call the static method
+    	// myPublicMethod(); This would output an error
+
+   	 Main myObj = new Main(); // Create an object of Main
+    	myObj.myPublicMethod(); // Call the public method
+ 	 }
+	}
+
+
+abstract: An abstract method belongs to an abstract class, and it does not have a body. The body is provided by the subclass
+
+	// abstract class
+	abstract class Main {
+ 	 public String fname = "John";
+  	public int age = 24;
+  	public abstract void study(); // abstract method 
+	}
+
+	// Subclass (inherit from Main)
+	class Student extends Main {
+ 	 public int graduationYear = 2018;
+ 	 public void study() { // the body of the abstract method is provided here
+   	 System.out.println("Studying all day long");
+  	}
+	}
+
+
+
+Encapsulation:
+	
+	The meaning of Encapsulation, is to make sure that "sensitive" data is hidden from users. To achieve this, you must:
+
+	declare class variables/attributes as private
+	provide public get and set methods to access and update the value of a private variable
+
+Interfaces :
+	An interface is a completely "abstract class" that is used to group related methods with empty bodies:
+	interface Animal {
+  	 public void animalSound(); // interface method (does not have a body)
+ 	 public void sleep(); // interface method (does not have a body)
+	}
+
+	To access the interface methods, the interface must be "implemented" (kinda like inherited) by another class with the implements keyword (instead of extends).
+	
+	class Pig implements Animal {
+ 	 public void animalSound() {
+  	  // The body of animalSound() is provided here
+   	 System.out.println("The pig says: wee wee");
+ 	 }
+ 	 public void sleep() {
+  	  // The body of sleep() is provided here
+   	 System.out.println("Zzz");
+ 	 }
+	}
+
+	class Main {
+ 	 public static void main(String[] args) {
+  	  Pig myPig = new Pig();  // Create a Pig object
+  	  myPig.animalSound();
+   	 myPig.sleep();
+ 	 }
+	}
