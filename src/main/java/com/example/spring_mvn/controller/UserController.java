@@ -25,11 +25,13 @@ public class UserController {
 
     @GetMapping("/get_user")
     public List<User> getUsers(){
+
         return userService.getUsers();
     }
 
     @GetMapping("/get_one")
     public User getOne(@RequestParam Integer id){
+
         return userService.getOne(id);
     }
 
