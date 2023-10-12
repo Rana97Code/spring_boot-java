@@ -3,6 +3,7 @@ package com.example.spring_mvn.controller;
 import com.example.spring_mvn.entity.Item;
 import com.example.spring_mvn.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -38,6 +39,17 @@ public class ItemController {
     public List<Item> findAllBySku(@PathVariable String sku){
         return itemService.findAllBySku(sku);
 
+    }
+
+    @GetMapping("/getall_by_type/{itemType}")
+    public List<Item> findAllByItemType(@PathVariable String itemType){
+        return itemService.findAllByItemType(itemType);
+    }
+
+    @PutMapping("/update_array/{itemType}")
+    public ResponseEntity<Void> updateArray(@PathVariable String itemType , @RequestBody List<Item> item){
+        itemService.updateArray(itemType, item);
+       return ResponseEntity.noContent().build();
     }
 
 

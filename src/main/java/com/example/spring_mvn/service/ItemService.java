@@ -12,4 +12,8 @@ public interface ItemService {
     List<Item> getAllItems();
 
     List<Item> findAllBySku(String sku);
+
+    List<Item> findAllByItemType(String itemType);
+
+    void updateArray(String itemType, List<Item> item);
 }
