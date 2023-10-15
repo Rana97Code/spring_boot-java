@@ -1,5 +1,6 @@
 package com.example.spring_mvn.service.impl;
 
+import com.example.spring_mvn.dto.AccessDTO;
 import com.example.spring_mvn.dto.UserDTO;
 import com.example.spring_mvn.entity.User;
 import com.example.spring_mvn.repository.UserRepository;
@@ -60,10 +61,23 @@ public class UserServiceImpl implements UserService {
     public void updateName(Integer id, UserDTO userDTO) {
         User user = userRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid User Id"+id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid User Id : "+id));
         user.setName(userDTO.getName());
 
         userRepository.save(user);
     }
+
+    @Override
+    public User CreateUserAccess(AccessDTO accessDTO) {
+        userRepository.save(accessDTO.getUser());
+        return null;
+    }
+
+//    @Override
+//    public User getUserAccess() {
+//        userRepository.getUserAccess();
+//        return null;
+//    }
+
 
 }

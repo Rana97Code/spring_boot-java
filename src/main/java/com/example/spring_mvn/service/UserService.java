@@ -1,5 +1,6 @@
 package com.example.spring_mvn.service;
 
+import com.example.spring_mvn.dto.AccessDTO;
 import com.example.spring_mvn.dto.UserDTO;
 import com.example.spring_mvn.entity.User;
 
@@ -21,4 +22,8 @@ public interface UserService {
     void deleteUser(Integer id);
 
     void updateName(Integer id, UserDTO userDTO);
+
+    User CreateUserAccess(AccessDTO accessDTO);
+
+//    User getUserAccess();
 }

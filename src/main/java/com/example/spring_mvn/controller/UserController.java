@@ -1,7 +1,10 @@
 package com.example.spring_mvn.controller;
 
+import com.example.spring_mvn.dto.AccessDTO;
+import com.example.spring_mvn.dto.UserAccessDTO;
 import com.example.spring_mvn.dto.UserDTO;
 import com.example.spring_mvn.entity.User;
+import com.example.spring_mvn.repository.UserRepository;
 import com.example.spring_mvn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping("/add_user")
     public String addUser(@RequestBody User user){
@@ -52,5 +58,17 @@ public class UserController {
         userService.updateName(id, userDTO);
 
         return ResponseEntity.noContent().build();
+    }
+
+    //Join Table and insert data to both table
+    @PostMapping("/user_access")
+    public User CreateUserAccess(@RequestBody AccessDTO accessDTO){
+        return userService.CreateUserAccess(accessDTO);
+    }
+
+    //Get Join query Data
+    @GetMapping("/get_user_access")
+    public List<UserAccessDTO> getUserAccess(){
+        return userRepository.getUserAccess();
     }
 }
