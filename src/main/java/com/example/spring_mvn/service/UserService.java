@@ -1,6 +1,7 @@
 package com.example.spring_mvn.service;
 
 import com.example.spring_mvn.dto.AccessDTO;
+import com.example.spring_mvn.dto.UserAccessDTO;
 import com.example.spring_mvn.dto.UserDTO;
 import com.example.spring_mvn.entity.User;
 
@@ -25,5 +26,5 @@ public interface UserService {
 
     User CreateUserAccess(AccessDTO accessDTO);
 
-//    User getUserAccess();
+    List<UserAccessDTO> getUserAccess();
 }

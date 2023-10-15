@@ -66,9 +66,15 @@ public class UserController {
         return userService.CreateUserAccess(accessDTO);
     }
 
-    //Get Join query Data
+//    //Get Join query Data Directly
+//    @GetMapping("/get_user_access")
+//    public List<UserAccessDTO> getUserAccess(){
+//        return userRepository.getUserAccess();
+//    }
+
+// Get Join query Data through UserService and UserServiceImpl
     @GetMapping("/get_user_access")
     public List<UserAccessDTO> getUserAccess(){
-        return userRepository.getUserAccess();
+        return userService.getUserAccess();
     }
 }

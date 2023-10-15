@@ -1,6 +1,7 @@
 package com.example.spring_mvn.service.impl;
 
 import com.example.spring_mvn.dto.AccessDTO;
+import com.example.spring_mvn.dto.UserAccessDTO;
 import com.example.spring_mvn.dto.UserDTO;
 import com.example.spring_mvn.entity.User;
 import com.example.spring_mvn.repository.UserRepository;
@@ -73,11 +74,10 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-//    @Override
-//    public User getUserAccess() {
-//        userRepository.getUserAccess();
-//        return null;
-//    }
+    @Override
+    public List<UserAccessDTO> getUserAccess() {
+        return userRepository.getUserAccess();
+    }
 
 
 }
