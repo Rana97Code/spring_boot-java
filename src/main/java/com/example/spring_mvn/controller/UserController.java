@@ -19,8 +19,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
 
     @PostMapping("/add_user")
     public String addUser(@RequestBody User user){

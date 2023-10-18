@@ -16,7 +16,7 @@ import lombok.ToString;
 @Entity
 public class Unit {
     @Id
-    @GeneratedValue
+//    @GeneratedValue
 
     private Integer id;
 
