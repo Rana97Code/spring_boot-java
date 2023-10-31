@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.servers.Server;
 
+
 @OpenAPIDefinition(
         info = @Info(
                 title = "Spring Boot API",
@@ -23,3 +24,5 @@ import io.swagger.v3.oas.annotations.servers.Server;
 )
 public class OpenApiConfig {
 }
+
+

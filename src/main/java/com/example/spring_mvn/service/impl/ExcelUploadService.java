@@ -1,5 +1,6 @@
 package com.example.spring_mvn.service.impl;
 
+import com.example.spring_mvn.dto.UnitDTO;
 import com.example.spring_mvn.entity.Unit;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -24,10 +25,11 @@ public class ExcelUploadService {
         return TYPE.equals(file.getContentType());
     }
 
-    public static List<Unit> getUnitsDataFromExcel(InputStream inputStream){
-        List<Unit> units = new ArrayList<>();
+    public static List<UnitDTO> getUnitsDataFromExcel(InputStream inputStream){
+        List<UnitDTO> units = new ArrayList<>();
         try {
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+//            Sheet1 is the number of Sheet
             XSSFSheet sheet = workbook.getSheet("Sheet1");
 //            System.out.println(sheet);
 //            System.out.println(workbook.getSheetName(0));
@@ -39,19 +41,20 @@ public class ExcelUploadService {
                 }
                 Iterator<Cell> cellIterator = row.iterator();
                 int cellIndex = 0;
-                Unit unit = new Unit();
+                UnitDTO unitDTO = new UnitDTO();
                 while (cellIterator.hasNext()){
                     Cell cell = cellIterator.next();
                     switch (cellIndex){
-                        case 0 -> unit.setId((int) cell.getNumericCellValue());
-                        case 1 -> unit.setUnitName(cell.getStringCellValue());
-                        case 2 -> unit.setAbbreviation(cell.getStringCellValue());
+                        //   case 0 -> unit.setId((int) cell.getNumericCellValue());
+                        case 0 -> unitDTO.setUnitName(cell.getStringCellValue());
+                        case 1 -> unitDTO.setAbbreviation(cell.getStringCellValue());
+
                         default -> {
                         }
                     }
                     cellIndex++;
                 }
-                units.add(unit);
+                units.add(unitDTO);
             }
         } catch (IOException e) {
             e.getStackTrace();
