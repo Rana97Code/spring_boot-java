@@ -1,27 +1,83 @@
 package com.example.spring_mvn.service.impl;
 
-import com.example.spring_mvn.dto.AccessDTO;
-import com.example.spring_mvn.dto.UserAccessDTO;
-import com.example.spring_mvn.dto.UserDTO;
+import com.example.spring_mvn.dto.*;
 import com.example.spring_mvn.entity.User;
+import com.example.spring_mvn.mapper.UsersMapper;
 import com.example.spring_mvn.repository.UserRepository;
+import com.example.spring_mvn.service.JwtService;
 import com.example.spring_mvn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JwtService jwtService;
+
+
     @Override
-    public void addUser(User user) {
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String username) {
+                return (UserDetails) userRepository.findByUsername(username)
+                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            }
+        };
+    }
+
+    @Override
+    public String addUser(SignUpRequest signUpRequest) {
+        User user= UsersMapper.MAPPER.modelToEntity(signUpRequest);
         userRepository.save(user);
+        return "Successfully Insert";
+    }
+
+
+//    @Override
+//    public JwtAuthResponse signup(SignUpRequest request) {
+//        var user = UserEntity.builder()
+//                .userName(request.getUserName())
+//                .userEmail(request.getUserEmail())
+//                .userPassword(passwordEncoder.encode(request.getUserPassword()));
+//        System.out.println(user);
+////        userRepository.save(user);
+//        var jwt = jwtService.generateToken((UserDetails) user);
+//        return JwtAuthResponse.builder().token(jwt).build();
+//    }
+
+    @Override
+    public String usersignin(SignInRequest signInRequest) {
+
+        var user = userRepository.findByUsername(signInRequest.getUsername());
+        System.out.println(user.stream().count());
+        var uu = user.stream().count();
+        if(isNotEmpty(uu)){
+            return jwtService.generateToken(signInRequest.getUsername());
+        } else {
+            throw new UsernameNotFoundException("Invalid Email OR Password !");
+        }
 
     }
+
+
+//    @Override
+//    public void addUser(User user) {
+//        userRepository.save(user);
+//
+//    }
 
     @Override
     public List<User> getUsers() {
@@ -29,7 +85,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getOne(Integer id) {
+    public User getOne(Long id) {
         User oneuser = userRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Invalid user Id"+id));
@@ -37,7 +93,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(Integer id, User user) {
+    public void updateUser(Long id, User user) {
         //check weather the user is in database or not
         userRepository
                 .findById(id)
@@ -48,7 +104,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Integer id) {
+    public void deleteUser(Long id) {
         //check weather the user is in database or not
         User user = userRepository
                 .findById(id)
@@ -59,11 +115,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateName(Integer id, UserDTO userDTO) {
+    public void updateName(Long id, UserDTO userDTO) {
         User user = userRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid User Id : "+id));
-        user.setName(userDTO.getName());
+        user.setUsername(userDTO.getName());
 
         userRepository.save(user);
     }
@@ -74,10 +130,10 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    @Override
-    public List<UserAccessDTO> getUserAccess() {
-        return userRepository.getUserAccess();
-    }
+//    @Override
+//    public List<UserAccessDTO> getUserAccess() {
+//        return userRepository.getUserAccess();
+//    }
 
 
 }

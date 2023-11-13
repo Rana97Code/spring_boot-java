@@ -14,7 +14,17 @@ Basic Requirements For Installation:
 	
 	project(Maven), Language(Java), Spring Boot(3.2.0 (M3)), Packaging( Jar), Java 17
 
-	Dependencies will add(Spring Web, Spring Boot Dev Tools, Lombak, Spring Data JPA, MySQL Driver)
+	Dependencies will add(
+			Spring Web,
+			Spring Boot Dev Tools,
+			Lombak, 
+			Spring Data JPA, 
+			MySQL Driver,
+			)
+
+
+	For additional dependency we can get from this web-site: https://mvnrepository.com/
+
 
 Install MySQL Workbench for mysql database manage from https://dev.mysql.com/downloads/installer/
 	download (mysql-installer-web-community-8.0.34.0.msi) or updated
@@ -80,14 +90,14 @@ For API Interface we can use Swagger for that we need to add dependency in pom.x
 	
 
 
-Now in src>main>java>com. need to create 5 folder
+Now in src>main>java>com. need to create 6 folder
 	1.controller
 	2.entity
 	3.repository
 	4.service
 
-	5.dto(For working with data tables single column)
-
+	5.dto/model(For working with data tables any column)
+	6.mapper(mapper need to identify entityToDto or dtoToEntity and insert data to through model/dto)
 
 Now at first need to create a class in (entity package/folder) with data table name as you want to create
 	then inside this entity
@@ -120,3 +130,13 @@ Now we have to create controller
 	
 	
 	
+For ServiceImpl all query will be wroted and Implementation.
+
+
+(Mapper) Sometimes need mappar for mange array or big data 
+	actually when we can't use entity for direct insert data to datatables , we user DTO/Model for accessing entity for that case 
+	we use Mapper for communicate between Entity and Model/DTO 
+
+
+	for setup mapper we use (org.mapstruct) as a mapper
+	and need to add dependency and plugins we can get from https://mvnrepository.com/

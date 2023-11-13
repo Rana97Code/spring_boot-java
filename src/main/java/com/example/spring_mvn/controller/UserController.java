@@ -20,12 +20,12 @@ public class UserController {
     private UserService userService;
 
 
-    @PostMapping("/add_user")
-    public String addUser(@RequestBody User user){
-        userService.addUser(user);
-
-        return "Successfully Add User";
-    }
+//    @PostMapping("/add_user")
+//    public String addUser(@RequestBody User user){
+//        userService.addUser(user);
+//
+//        return "Successfully Add User";
+//    }
 
     @GetMapping("/get_user")
     public List<User> getUsers(){
@@ -34,25 +34,25 @@ public class UserController {
     }
 
     @GetMapping("/get_one")
-    public User getOne(@RequestParam Integer id){
+    public User getOne(@RequestParam Long id){
 
         return userService.getOne(id);
     }
 
     @PutMapping("/update_user/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable Integer id, @RequestBody User user){
+    public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody User user){
         userService.updateUser(id, user);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/delete_user/{id}")
-    public ResponseEntity<Void>deleteUser(@PathVariable Integer id){
+    public ResponseEntity<Void>deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/update_name/{id}")
-    public ResponseEntity<Void> updateName(@PathVariable Integer id, @RequestBody UserDTO userDTO){
+    public ResponseEntity<Void> updateName(@PathVariable Long id, @RequestBody UserDTO userDTO){
         userService.updateName(id, userDTO);
 
         return ResponseEntity.noContent().build();
@@ -71,8 +71,8 @@ public class UserController {
 //    }
 
 // Get Join query Data through UserService and UserServiceImpl
-    @GetMapping("/get_user_access")
-    public List<UserAccessDTO> getUserAccess(){
-        return userService.getUserAccess();
-    }
+//    @GetMapping("/get_user_access")
+//    public List<UserAccessDTO> getUserAccess(){
+//        return userService.getUserAccess();
+//    }
 }
