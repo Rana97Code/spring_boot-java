@@ -1,6 +1,6 @@
 package com.example.spring_mvn.service.impl;
 
-import com.example.spring_mvn.entity.User_Role;
+import com.example.spring_mvn.entity.UserRole;
 import com.example.spring_mvn.repository.UserRoleRepository;
 import com.example.spring_mvn.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     private UserRoleRepository userRoleRepository;
 
     @Override
-    public void addRole(User_Role user_role){
-        userRoleRepository.save(user_role);
+    public void addRole(UserRole userRole){
+        userRoleRepository.save(userRole);
     }
 }

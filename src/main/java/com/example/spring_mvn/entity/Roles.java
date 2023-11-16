@@ -9,22 +9,23 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
 @Getter
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User_Role {
+public class Roles {
 
     @Id
     @GeneratedValue
 
-    private Integer id;
+    private Long id;
 
-    @Column(name="role_tag")
-    private String roleTag;
+    @Column(name="role_name")
+    private String roleName;
 
-    @Column(name="role_details")
+    @Column(name = "role_details")
     private String roleDetails;
 
 

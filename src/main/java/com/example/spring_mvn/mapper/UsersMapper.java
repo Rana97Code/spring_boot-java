@@ -9,6 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface UsersMapper {
+
     UsersMapper MAPPER= Mappers.getMapper(UsersMapper.class);
     SignUpRequest entityToModel(User entity);
     User modelToEntity(SignUpRequest model);

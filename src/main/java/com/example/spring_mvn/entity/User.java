@@ -14,6 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Getter
+@Setter
 public class User implements UserDetails {
 
     @Id
@@ -21,15 +23,22 @@ public class User implements UserDetails {
     @Column(name = "id", unique = true, updatable = false, nullable = false)
     private Long id;
     private String username;
-    private String email;
-    private String phone;
-    private String address;
+
+    @Column(name = "user_email")
+    private String userEmail;
+
+    @Column(name = "user_phone")
+    private String userPhone;
+
+    @Column(name = "user_address")
+    private String userAddress;
+
     private String password;
 
-    //for join table with foreign key
-    @OneToMany(targetEntity = User_Access.class, cascade = CascadeType.ALL)
-    @JoinColumn(name="u_id", referencedColumnName = "id")
-    private List<User_Access> useraccesses;
+//    //for join table with foreign key
+//    @OneToMany(targetEntity = User_Role.class, cascade = CascadeType.ALL)
+//    @JoinColumn(name="user_id", referencedColumnName = "id")
+//    private List<User_Role> userid;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

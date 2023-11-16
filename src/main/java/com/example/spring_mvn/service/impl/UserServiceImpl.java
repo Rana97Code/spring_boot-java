@@ -61,11 +61,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public String usersignin(SignInRequest signInRequest) {
 
+        UserRoleModel userRoleModel = userRepository.getUserRole(signInRequest.getUsername());
+//        System.out.println(userRoleModel);
+
         var user = userRepository.findByUsername(signInRequest.getUsername());
         System.out.println(user.stream().count());
         var uu = user.stream().count();
         if(isNotEmpty(uu)){
-            return jwtService.generateToken(signInRequest.getUsername());
+            return jwtService.generateToken(userRoleModel);
         } else {
             throw new UsernameNotFoundException("Invalid Email OR Password !");
         }
@@ -124,16 +127,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    @Override
-    public User CreateUserAccess(AccessDTO accessDTO) {
-        userRepository.save(accessDTO.getUser());
-        return null;
-    }
 
-//    @Override
-//    public List<UserAccessDTO> getUserAccess() {
-//        return userRepository.getUserAccess();
-//    }
 
 
 }

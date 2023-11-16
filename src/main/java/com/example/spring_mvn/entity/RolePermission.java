@@ -9,32 +9,20 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
 @Getter
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User_Access {
-
+public class RolePermission {
     @Id
     @GeneratedValue
 
-    private Integer id;
+    private Long id;
 
-    @Column(name="access_id")
-    private Integer accessId;
+    @Column(name="role_id")
+    private String roleId;
 
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-//    public void setUserId(Integer userId) {
-//        this.userId = userId;
-//    }
-
-    public void setAccessId(Integer accessId) {
-        this.accessId = accessId;
-    }
+    @Column(name="permission_id")
+    private String permissionId;
 }

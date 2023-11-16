@@ -1,10 +1,9 @@
 package com.example.spring_mvn.controller;
 
 import com.example.spring_mvn.dto.AccessDTO;
-import com.example.spring_mvn.dto.UserAccessDTO;
+import com.example.spring_mvn.dto.RoleModel;
 import com.example.spring_mvn.dto.UserDTO;
 import com.example.spring_mvn.entity.User;
-import com.example.spring_mvn.repository.UserRepository;
 import com.example.spring_mvn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +18,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-//    @PostMapping("/add_user")
-//    public String addUser(@RequestBody User user){
-//        userService.addUser(user);
-//
-//        return "Successfully Add User";
-//    }
 
     @GetMapping("/get_user")
     public List<User> getUsers(){
@@ -59,10 +51,10 @@ public class UserController {
     }
 
     //Join Table and insert data to both table
-    @PostMapping("/user_access")
-    public User CreateUserAccess(@RequestBody AccessDTO accessDTO){
-        return userService.CreateUserAccess(accessDTO);
-    }
+//    @PostMapping("/user_access")
+//    public User CreateUserAccess(@RequestBody AccessDTO accessDTO){
+//        return userService.CreateUserAccess(accessDTO);
+//    }
 
 //    //Get Join query Data Directly
 //    @GetMapping("/get_user_access")
@@ -70,9 +62,5 @@ public class UserController {
 //        return userRepository.getUserAccess();
 //    }
 
-// Get Join query Data through UserService and UserServiceImpl
-//    @GetMapping("/get_user_access")
-//    public List<UserAccessDTO> getUserAccess(){
-//        return userService.getUserAccess();
-//    }
+
 }

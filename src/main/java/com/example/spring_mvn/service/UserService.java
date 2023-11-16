@@ -35,9 +35,7 @@ public interface UserService {
 
     void updateName(Long id, UserDTO userDTO);
 
-    User CreateUserAccess(AccessDTO accessDTO);
 
-//    List<UserAccessDTO> getUserAccess();
 
 
 }

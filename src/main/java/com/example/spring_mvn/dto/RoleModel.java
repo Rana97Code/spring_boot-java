@@ -2,7 +2,6 @@ package com.example.spring_mvn.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -15,16 +14,14 @@ import lombok.ToString;
 //for ignore to print undefined item
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class UserAccessDTO {
+public class RoleModel {
 
-
-    private String name;
-    private Integer accessId;
+    private Integer roleId;
+    private String roleName;
     private String roleDetails;
-    //For define specific field
-    public UserAccessDTO(String name, Integer accessId, String roleDetails){
-        this.name = name;
-        this.accessId = accessId;
+    public RoleModel(Integer roleId, String roleName, String roleDetails){
+        this.roleId = roleId;
+        this.roleName = roleName;
         this.roleDetails = roleDetails;
     }
 

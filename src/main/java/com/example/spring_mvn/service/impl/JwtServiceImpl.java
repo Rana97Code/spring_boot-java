@@ -1,5 +1,7 @@
 package com.example.spring_mvn.service.impl;
 
+import com.example.spring_mvn.dto.UserRoleModel;
+import com.example.spring_mvn.entity.UserRole;
 import com.example.spring_mvn.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -19,12 +21,20 @@ import java.util.function.Function;
 public class JwtServiceImpl implements JwtService {
     public static final String SECRET = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
     @Override
-    public String generateToken(String userDetails) {
-        return createToken(new HashMap<>(), userDetails);
+    public String generateToken(UserRoleModel userRoleModel) {
+        return createToken(userRoleModel);
     }
 
-    private String createToken(Map<String, Object> extraClaims, String userDetails) {
-        return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.intern())
+    private String createToken(UserRoleModel userRoleModel) {
+
+                 Map<String, Object> claims = new HashMap<>();
+                 claims.put("username", userRoleModel.getUsername());
+                 claims.put("user_id", userRoleModel.getId());
+                 claims.put("role_name", userRoleModel.getRoleName());
+                 claims.put("role_id",userRoleModel.getRoleId());
+
+        return Jwts.builder().setSubject(userRoleModel.getUsername().intern())
+                .addClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 25))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
